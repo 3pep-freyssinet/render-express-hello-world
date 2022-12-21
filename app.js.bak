@@ -32,8 +32,8 @@ io.on('connection', (socket) => {
 	
 	socket.on("note_by_id", (note)=> {
 		console.log("'note_by_id = " + note);
-		html_+ = "note_by_id = " + note;
-		socket.emit('note_by_id_res', "success");
+		html_ = html_ + " note_by_id = " + note;
+		socket.emit('note_by_id_res', {"res":"success"});
 	});
 	
 });
