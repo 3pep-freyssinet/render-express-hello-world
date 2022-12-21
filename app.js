@@ -34,7 +34,7 @@ io.on('connection', (socket) => {
 		console.log("'note_by_id = " + note);
 		html_ = html_ + " note_by_id, note = " + note;
 		callback = {"res":"success"};
-		socket.emit('note_by_id_res', {"res":"success"});
+		//socket.emit('note_by_id_res', {"res":"success"});
 	});
 	
 });

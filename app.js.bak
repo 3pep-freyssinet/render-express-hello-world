@@ -33,7 +33,7 @@ io.on('connection', (socket) => {
 	socket.on("note_by_id", (note, callback)=> {
 		console.log("'note_by_id = " + note);
 		html_ = html_ + " note_by_id, note = " + note;
-		//callback = {"res":"success"};
+		callback = {"res":"success"};
 		socket.emit('note_by_id_res', {"res":"success"});
 	});
 	
