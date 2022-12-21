@@ -30,6 +30,12 @@ io.on('connection', (socket) => {
 	console.log("************************ io connection  ********************************* socket.id = " + socket.id);
 	html_ = "socket.id = " + socket.id;
 	
+	socket.on("note_by_id", (note)=> {
+		console.log("'note_by_id = " + note);
+		html_ = html_ + "note_by_id = " + note;
+		socket.emit('note_by_id_res', "success");
+	});
+	
 });
 
 app.get("/", (req, res) => res.type('html').send(html_));
