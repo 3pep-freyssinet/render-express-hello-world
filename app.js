@@ -1,4 +1,5 @@
 const express = require("express");
+http   = require('http');
 const app = express();
 const port = process.env.PORT || 3001;
 
@@ -6,6 +7,12 @@ app.get("/", (req, res) => res.type('html').send(html));
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 
+//detect the user first connection
+server = http.createServer(app),
+io     = require('socket.io')(server);	
+io.on('connection', (socket) => {
+	console.log("************************ io connection  ********************************* socket.id = " + socket.id);
+});
 
 const html = `
 <!DOCTYPE html>
