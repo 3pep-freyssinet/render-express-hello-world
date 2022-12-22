@@ -41,8 +41,35 @@ io.on('connection', (socket) => {
 	
 });
 
-app.get("/", (req, res) => res.type('html').send(html_));
+const Pool = require('pg').Pool
 
+/*
+//localhost
+const pool = new Pool({
+  user: 'postgres',
+  host: 'localhost',
+  database: 'postgres',
+  password: 'tomcat14200',
+  port: 5432,
+  client_encoding: 'utf8',
+  //ssl: true,
+  max: 20,
+  min: 1,
+  idleTimeoutMillis: 1000,
+})
+*/
+
+console.log('process.env.DATABASE_URL = ' + process.env.DATABASE_URL);
+
+//Heroku/Render
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
+});
+
+app.get("/", (req, res) => res.type('html').send(html_));
 const html = `
 <!DOCTYPE html>
 <html>
