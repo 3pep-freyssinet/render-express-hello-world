@@ -59,6 +59,7 @@ const pool = new Pool({
 })
 */
 
+console.log('process.env.DATABASE_URL = ' + process.env.DATABASE_URL);
 
 //Heroku/Render
 const pool = new Pool({
