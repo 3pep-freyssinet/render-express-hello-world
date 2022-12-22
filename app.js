@@ -30,10 +30,12 @@ io.on('connection', (socket) => {
 	console.log("************************ io connection  ********************************* socket.id = " + socket.id);
 	html_ = "socket.id = " + socket.id;
 	
-	socket.on("note_by_id", (note, callback)=> {
+	socket.on("note_by_id", async (note, callback)=> {
 		console.log("'note_by_id = " + note);
 		html_ = html_ + " note_by_id, note = " + note;
-		callback = {"res":"success"};
+		const timeout = 1000
+        await new Promise(resolve => setTimeout(resolve, timeout))
+		callback( {"res":"success"});
 		//socket.emit('note_by_id_res', {"res":"success"});
 	});
 	
