@@ -61,10 +61,10 @@ const pool = new Pool({
  
 console.log('process.env.DATABASE_URL = ' + process.env.DATABASE_URL);
 //const DATABASE_URL = "postgres://pgsql_s1ez_user:XyREyfYnYa4t1zacPLgoVwQ330pTReij@dpg-cei36h9gp3jvlf1aeb2g-a.oregon-postgres.render.com/pgsql_s1ez";
-//Heroku/Render
+//Render
 const pool = new Pool({
   //connectionString: DATABASE_URL,
-   connectionString:process.env.DATABASE_URL
+   connectionString:process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false
   }
