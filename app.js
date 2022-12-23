@@ -71,6 +71,64 @@ const pool = new Pool({
 });
 console.log('pool = ' + pool);
 
+//testing db
+var query1 = "SELECT * " + 
+    " FROM youngstudents " ;
+	
+	console.log('query1 = ' + query1);
+	 
+	 pool.query(query1, [], async(error, results) => { 
+		  
+		const promise = new Promise((resolve, reject) => {
+			if(error)(reject("promise error " + error));
+			resolve(results);
+		});
+		// 
+		await promise;
+		promise.then((results) => {
+		  //console.log('**************promise in get_all_not_seen_messages. results.rows = ' + results.rows + '(results.rowCount == 0) = ' + (results.rowCount == 0));
+		  //console.log('**************promise in get_all_not_seen_messages. results = '+results+' count = '+results.rowCount+' length = '+results.rows.length+' fields length = '+results.fields.length);
+		  //console.log('**************value keys = '+Object.keys(results));
+		  //console.log('**************rowAsArray = '+results.rowAsArray);
+		 
+		 for(let f of results.fields){
+			console.log('field = ' + f.name);  
+		 }
+		  
+		  /*
+		  if(results.length)
+			res.end(JSON.stringify({
+			"status": 200, 
+			"response": 'SUCCESS',
+			"data": results.map(({ fromnickname, tonickname }) => ({
+            fromNickname: fromnickname,
+            toNickname: tonickname
+          }))
+        }));
+		  */
+		  
+		  if(results.rowCount != 0){
+			  for (let i = 0; i <= results.rows.length - 1; i++){
+				  for(let f of results.fields)
+				  console.log(
+							' *fromnickname = ' + results.rows[i].fromNickname + "\n" +
+							' *imageprofile = ' + results.rows[i].imageprofile  
+				  );
+			  }  
+		  }	
+		  
+		  //send the result to client
+		  //io.to(socket.id).emit('get_all_not_seen_messages_res', results);	
+		  
+		}).catch((error) =>{
+			console.log("************get_all_not_seen_messages_res, promise 'SELECT ref ... from messages' " + error.message);
+			//io.to(socket.id).emit('get_all_not_seen_messages_res', []);			
+		});
+	 });//end pool
+	 
+
+
+
 app.get("/", (req, res) => res.type('html').send(html_));
 const html = `
 <!DOCTYPE html>
