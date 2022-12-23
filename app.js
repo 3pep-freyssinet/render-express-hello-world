@@ -111,8 +111,8 @@ var query1 = "SELECT * " +
 			  for (let i = 0; i <= results.rows.length - 1; i++){
 				  for(let f of results.fields)
 				  console.log(
-							' *fromnickname = ' + results.rows[i].fromNickname + "\n" +
-							' *imageprofile = ' + results.rows[i].imageprofile  
+							' *first_name = ' + results.rows[i].first_name + "\n" +
+							' *last_name  = ' + results.rows[i].last_name  
 				  );
 			  }  
 		  }	
