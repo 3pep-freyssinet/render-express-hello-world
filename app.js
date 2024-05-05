@@ -58,7 +58,8 @@ const pool = new Pool({
   idleTimeoutMillis: 1000,
 })
 */
- 
+
+/* render pg
 console.log('process.env.DATABASE_URL = ' + process.env.DATABASE_URL);
 //const DATABASE_URL = "postgres://pgsql_s1ez_user:XyREyfYnYa4t1zacPLgoVwQ330pTReij@dpg-cei36h9gp3jvlf1aeb2g-a.oregon-postgres.render.com/pgsql_s1ez";
 //Render
@@ -69,11 +70,30 @@ const pool = new Pool({
     rejectUnauthorized: false
   }
 });
+*/
+
+//Render + Aiven + env
+const pool = new Pool({
+  user: process.env.USER,
+  host: process.env.HOST,
+  database: process.env.DATABASE,
+  password: process.env.PASSWORD,
+  port: process.env.PORT,
+  client_encoding: 'utf8',
+  ssl: {
+    rejectUnauthorized: true,
+    ca: fs.readFileSync("./ca.pem").toString(),
+  },
+  max: 20,
+  min: 1,
+  idleTimeoutMillis: 1000,
+});
+
 console.log('pool = ' + pool);
 
 //testing db
 var query1 = "SELECT * " + 
-    " FROM youngstudents " ;
+    " FROM users " ;
 	
 	console.log('query1 = ' + query1);
 	 
@@ -101,19 +121,20 @@ var query1 = "SELECT * " +
 			"status": 200, 
 			"response": 'SUCCESS',
 			"data": results.map(({ fromnickname, tonickname }) => ({
-            fromNickname: fromnickname,
-            toNickname: tonickname
-          }))
-        }));
+            			fromNickname: fromnickname,
+            			toNickname: tonickname
+         		 }))
+        	}));
 		  */
 		  
 		  if(results.rowCount != 0){
 			  for (let i = 0; i <= results.rows.length - 1; i++){
-				  for(let f of results.fields)
-				  console.log(
-							' *first_name = ' + results.rows[i].first_name + "\n" +
-							' *last_name  = ' + results.rows[i].last_name  
-				  );
+				  for(let f of results.fields){
+				  	console.log(
+							' *nickname = ' + results.rows[i].nickname + "\n" +
+							//' *last_name  = ' + results.rows[i].last_name  
+				        );
+				  }
 			  }  
 		  }	
 		  
