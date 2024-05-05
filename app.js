@@ -131,7 +131,7 @@ var query1 = "SELECT * " +
 			  for (let i = 0; i <= results.rows.length - 1; i++){
 				  for(let f of results.fields){
 				  	console.log(
-							' *nickname = ' + results.rows[i].nickname + "\n" +
+							' *nickname = ' + results.rows[i].nickname + "\n" 
 							//' *last_name  = ' + results.rows[i].last_name  
 				        );
 				  }
