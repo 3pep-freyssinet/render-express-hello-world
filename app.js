@@ -3,7 +3,6 @@ const express = require("express");
 http   		= require('http');
 const app 	= express();
 const port 	= process.env.PORT || 5000;
-var fs       	= require("fs");
 
 //app.get("/", (req, res) => res.type('html').send(html_));
 
@@ -18,6 +17,7 @@ require('dotenv').config();
 const express = require('express')
 //const path = require('path')
 const PORT = process.env.PORT || 5000
+var fs     = require("fs");
 http   = require('http'),
 app    = express(),
 server = http.createServer(app);
